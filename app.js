@@ -10,16 +10,17 @@ app.use(express.static('views'));
 
 app.set('view engine', 'ejs');
 
-const server = app.listen(process.env.PORT || 10001, ()=>{console.log("Listening at port 10001...")});
-
 app.use(cookieParser());
 
-//app.use(routes);
+app.use(routes);
 
 const connection = dbConnection;
 connection.connect(err=>{
   if (err) throw err;
   console.log("Database connected!");
 });
-
 dbTableCreation(connection)
+
+const server = app.listen(process.env.PORT || 10001, ()=>{
+  console.log("Listening at port 10001...")
+});
