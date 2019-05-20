@@ -2,9 +2,9 @@ const bcrypt = require('bcrypt')
 const dbConnection = require(__dirname + '/../Database/connection');
 
 module.exports = (req, res, next) => {
-  if(!req.cookies.email) req.isLoggedin = false;
+  if(!req.cookies.id) req.isLoggedin = false;
   else{
-    let sql = "Select * FROM User WHERE email = ?";
+    let sql = "Select * FROM User WHERE id = ?";
     dbConnection.query(sql, req.cookies.email, (err, result)=>{
       if(err) throw err;
       else{

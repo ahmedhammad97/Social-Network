@@ -6,7 +6,7 @@
     <br />
     <h1>FriendsNet</h1>
     <br>
-    <h3>Because no friendship is an accedent</h3>
+    <h3>Because no friendship is an accident</h3>
     <br />
   </center>
 </div>
@@ -15,20 +15,52 @@
   <center>
 <% if (loggedin) {%>
   <script>
-  $.ajax({
-      method: "POST",
-      url: "/friendsrecommendations",
-      data: {}
-    }).done(function(data) {
-      renderRecommentations(data);
-    }).fail(function(err) {
-      alert("Something went wrong!");
-    });
+    $.ajax({
+        method: "POST",
+        url: "/friendsrecommendations",
+        data: {}
+      }).done(function(data) {
+        renderRecommentations(data);
+      }).fail(function(err) {
+        alert("Something went wrong!");
+      });
+
+    $(".recName button").click(() => {
+      $.ajax({
+        method: "POST",
+        url: "/addfriend",
+        data: {"friendId" : $(this).recId}
+      }).done(function(data) {
+        $(this).disabled = true;
+        alert("Request sent successfully")
+      }).fail(function(err) {
+        alert("Something went wrong!");
+      });
+    })
   </script>
 
-  <ul id="recommends">
-    <!--Create tempelete and clone it with js, then loop and populate it-->
-  </ul>
+  <div id="recommends">
+    <span class="recItem">
+      <span class="recImg"><img src=""/></span>
+      <br />
+      <span class="recName"></span>
+      <button name="button" >Add Friend</button>
+    </span>
+
+    <span class="recItem">
+      <span class="recImg"><img src=""/></span>
+      <br />
+      <span class="recName"></span>
+      <button name="button" >Add Friend</button>
+    </span>
+
+    <span class="recItem">
+      <span class="recImg"><img src=""/></span>
+      <br />
+      <span class="recName"></span>
+      <button name="button" >Add Friend</button>
+    </span>
+  </div>
 <%} else {%>
     <br /><br />
     <a href="/login"><button type="button" class="homeBtns">Login</button></a>
@@ -40,6 +72,12 @@
 
 <script>
   function renderRecommentations(data){
-
+    let container = document.querySelectorAll('#recommends')
+    for (let i=0; i < Math.min(container.length, data.length); i++){
+      let elem = container[i];
+      elem.children[3].setAttribute("recId", data[i].id);
+      elem.children[0].children[0].setAttribute("src", data[i].imgSrc);
+      elem.children[2].text = data[i].name;
+    }
   }
 </script>
