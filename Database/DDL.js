@@ -1,7 +1,7 @@
 module.exports = con => {
   let tablesCreation = `
   CREATE TABLE IF NOT EXISTS User (
-    Id int(8) NOT NULL,
+    Id varchar(8) NOT NULL,
     FirstName varchar(32) NOT NULL,
     LastName varchar(32) NOT NULL,
     NickName varchar(32) DEFAULT NULL,
@@ -17,23 +17,23 @@ module.exports = con => {
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   CREATE TABLE IF NOT EXISTS Phone (
-    Id int(8) NOT NULL,
+    Id varchar(8) NOT NULL,
     Number varchar(32) NOT NULL UNIQUE,
     PRIMARY KEY(Id, Number),
     FOREIGN KEY(Id) REFERENCES User(Id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   CREATE TABLE IF NOT EXISTS Friendship (
-    Id1 int(8) NOT NULL,
-    Id2 int(8) NOT NULL,
+    Id1 varchar(8) NOT NULL,
+    Id2 varchar(8) NOT NULL,
     PRIMARY KEY(Id1, Id2),
     FOREIGN KEY(Id1) REFERENCES User(Id),
     FOREIGN KEY(Id2) REFERENCES User(Id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   CREATE TABLE IF NOT EXISTS Request (
-    Sender int(8) NOT NULL,
-    Reciever int(8) NOT NULL,
+    Sender varchar(8) NOT NULL,
+    Reciever varchar(8) NOT NULL,
     PRIMARY KEY(Sender, Reciever),
     FOREIGN KEY(Sender) REFERENCES User(Id),
     FOREIGN KEY(Reciever) REFERENCES User(Id)
