@@ -1,0 +1,6 @@
+<%- include('partials/header', {loggedin: loggedin}) %>
+<script>
+  document.cookie = `id=<%= id %>;path=/;`;
+  window.location.assign('/');
+</script>
+<%- include('partials/footer') %>

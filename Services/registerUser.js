@@ -16,12 +16,13 @@ module.exports = (req, res) => {
   if (req.body.marital === undefined){req.body.marital = null;}
 
   let hash = bcrypt.hashSync(req.body.password, 8);
+
   // Insert User data
   let sql = `INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
   dbConnection.query(sql, [userId, req.body.firstName, req.body.lastName, req.body.nickName, hash, req.body.email, req.body.gender,
   req.body.birthdate, req.body.hometown, req.body.marital, req.body.aboutme, imgName],
   (err, result) => {
-     if (err) {throw err; res.send("Error, wrong data"); return;}
+     if (err) {res.render('error')}
      else{
        if (!(req.body.phones.trim() === '')){
          // Insert phone numbers
@@ -36,21 +37,19 @@ module.exports = (req, res) => {
          sql = sql.slice(0, -1) + ';';
          dbConnection.query(sql, phoneList, (err, result) => {
            if (err) {
-             throw err;
              sql = `DELETE FROM User WHERE User.Id = ?`
              dbConnection.query(sql, userId, (err, result) => {
                if (err) throw err;
              })
-              res.send("Error, wrong data"); return;
-           }
-           else{
-             if(req.files !== undefined && req.files !== null){
-               // Insert image
-               req.files.img.mv(__dirname + '/../views/assets/images/' + imgName)
-             }
+              res.render('error');
            }
          })
        }
+       if(req.files !== undefined && req.files !== null){
+         // Insert image
+         req.files.img.mv(__dirname + '/../views/assets/images/' + imgName)
+       }
+       res.render('successReg', {"id": userId, "loggedin": req.loggedin});
      }
   });
 }

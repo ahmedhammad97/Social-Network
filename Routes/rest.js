@@ -12,7 +12,7 @@ var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/', (req, res) => {
-  res.render('homepage', {loggedin : req.isLoggedin})
+  res.render('homepage', {loggedin : req.loggedin})
 })
 
 router.get('/register', (req, res) => {
