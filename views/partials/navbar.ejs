@@ -1,0 +1,16 @@
+<nav>
+  <span>
+    <a href="/"><img src="assets/logo.png" alt=""></a>
+  </span>
+  <ul>
+<% if (loggedin) {%>
+  <li><a href="/myrequests">Requests (<%= reqCount %>)</a></li>
+  <li><a href="/friendlist">Friends</a></li>
+  <li><a href="/myprofile">Profile</a></li>
+  <li><a href="/logout">Logout</a></li>
+<%} else {%>
+  <li><a href="/register">Register</a></li>
+  <li><a href="/login">Login</a></li>
+<% } %>
+  </ul>
+</nav>
