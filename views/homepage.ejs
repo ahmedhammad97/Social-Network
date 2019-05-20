@@ -29,7 +29,8 @@
       $.ajax({
         method: "POST",
         url: "/addfriend",
-        data: {"friendId" : $(this).recId}
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({"friendId" : $(this).recId})
       }).done(function(data) {
         $(this).disabled = true;
         alert("Request sent successfully")
