@@ -12,7 +12,7 @@ module.exports = con => {
     HomeTown varchar(32) DEFAULT NULL,
     MaritalStatus varchar(16) DEFAULT NULL,
     AboutMe varchar(256) DEFAULT NULL,
-    Picture varchar(64) DEFAULT NULL UNIQUE,
+    Picture varchar(64) DEFAULT NULL,
     PRIMARY KEY(Id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

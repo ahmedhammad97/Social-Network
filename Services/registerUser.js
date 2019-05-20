@@ -22,7 +22,7 @@ module.exports = (req, res) => {
   dbConnection.query(sql, [userId, req.body.firstName, req.body.lastName, req.body.nickName, hash, req.body.email, req.body.gender,
   req.body.birthdate, req.body.hometown, req.body.marital, req.body.aboutme, imgName],
   (err, result) => {
-     if (err) {res.render('error')}
+     if (err) {console.log(err); res.render('error');}
      else{
        if (!(req.body.phones.trim() === '')){
          // Insert phone numbers
@@ -35,12 +35,13 @@ module.exports = (req, res) => {
            sql += ` (?, ?),`
          }
          sql = sql.slice(0, -1) + ';';
-         dbConnection.query(sql, phoneList, (err, result) => {
-           if (err) {
+         dbConnection.query(sql, phoneList, (err2, result2) => {
+           if (err2) {
              sql = `DELETE FROM User WHERE User.Id = ?`
-             dbConnection.query(sql, userId, (err, result) => {
-               if (err) throw err;
+             dbConnection.query(sql, userId, (err3, result3) => {
+               if (err3) throw err3;
              })
+             console.log(err3);
               res.render('error');
            }
          })
