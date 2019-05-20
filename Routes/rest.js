@@ -27,6 +27,8 @@ router.get('/login', (req, res) => {
 
 router.post('/register', fileUpload(), urlencodedParser, registerUser)
 
+router.post('/login', urlencodedParser, loginUser)
+
 router.post('/friendsrecommendations', recommender)
 
 router.post('/addfriend', jsonParser, addFriend)

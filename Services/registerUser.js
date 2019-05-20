@@ -1,6 +1,6 @@
 const dbConnection = require(__dirname + '/../Database/connection');
 const shortid = require('shortid');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 module.exports = (req, res) => {
   let userId = shortid.generate();
