@@ -15,15 +15,15 @@
   <center>
 <% if (loggedin) {%>
   <script>
-    $.ajax({
-        method: "POST",
-        url: "/friendsrecommendations",
-        data: {}
-      }).done(function(data) {
-        renderRecommentations(data);
-      }).fail(function(err) {
-        alert("Something went wrong!");
-      });
+    // $.ajax({
+    //     method: "POST",
+    //     url: "/friendsrecommendations",
+    //     data: {}
+    //   }).done(function(data) {
+    //     renderRecommentations(data);
+    //   }).fail(function(err) {
+    //     alert("Something went wrong!");
+    //   });
 
     $(".recName button").click(() => {
       $.ajax({

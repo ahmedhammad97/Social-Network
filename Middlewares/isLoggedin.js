@@ -1,18 +1,19 @@
 const dbConnection = require(__dirname + '/../Database/connection');
 
-module.exports = async (req, res, next) => {
-  if(!req.cookies.id) req.loggedin = false;
+module.exports = (req, res, next) => {
+  if(!req.cookies.id){
+    req.loggedin = false;
+    return next();
+  }
   else{
-    let sql = "Select * FROM User WHERE id = ?";
-    await dbConnection.query(sql, req.cookies.id, (err, result)=>{
+    let sql = "SELECT * FROM User WHERE id = ?";
+    dbConnection.query(sql, req.cookies.id, (err, result)=>{
       if(err) throw err;
       else{
-        console.log("Hey!");
         if(result.length === 0) req.loggedin = false;
         else req.loggedin = true;
+        return next()
       }
     })
   }
-  console.log(req.loggedin);
-  return next()
 }
