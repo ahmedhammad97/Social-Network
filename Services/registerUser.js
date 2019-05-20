@@ -7,7 +7,7 @@ module.exports = (req, res) => {
   let imgName = null;
 
   if (req.files === null || req.files === undefined){
-    if (req.body.gender = "male") imgName = 'maledefault.png';
+    if (req.body.gender === "male") imgName = 'maledefault.png';
     else imgName = 'femaledefault.png';
   }
   else{imgName = userId + '.' + req.files.img.name.split('.').pop();}
@@ -23,7 +23,7 @@ module.exports = (req, res) => {
   (err, result) => {
      if (err) {throw err; res.send("Error, wrong data"); return;}
      else{
-       if (!req.body.phones.trim() === ''){
+       if (!(req.body.phones.trim() === '')){
          // Insert phone numbers
          let phoneNums = req.body.phones.split(' ');
          sql = `INSERT INTO Phone VALUES`;
@@ -33,7 +33,7 @@ module.exports = (req, res) => {
            phoneList.push(phoneNums[i])
            sql += ` (?, ?),`
          }
-         sql = sql.slice(0, -1);
+         sql = sql.slice(0, -1) + ';';
          dbConnection.query(sql, phoneList, (err, result) => {
            if (err) {
              throw err;
@@ -44,9 +44,9 @@ module.exports = (req, res) => {
               res.send("Error, wrong data"); return;
            }
            else{
-             if(req.files.img !== undefined){
+             if(req.files !== undefined && req.files !== null){
                // Insert image
-               req.files.img.mv(__dirname + '/../views/assets/images')
+               req.files.img.mv(__dirname + '/../views/assets/images/' + imgName)
              }
            }
          })
