@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser')
 const routes = require(__dirname + '/Routes/rest');
 const dbConnection = require(__dirname + '/Database/connection');
 const dbTableCreation = require(__dirname + '/Database/DDL');
-const loggedinMiddleware = require(__dirname + '/../Middlewares/isLoggedin')
+const loggedinMiddleware = require(__dirname + '/Middlewares/isLoggedin')
 
 const app = express();
 

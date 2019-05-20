@@ -8,8 +8,8 @@ const addFriend = require(__dirname + '/../Services/addFriend')
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-router.get('/', loggedinMiddleware, (req, res) => {
-  res.render('homepage', {loggedin : true})
+router.get('/', (req, res) => {
+  res.render('homepage', {loggedin : req.isLoggedin})
 })
 
 router.post('/friendsrecommendations', recommender)
