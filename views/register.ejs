@@ -1,0 +1,47 @@
+<%- include('partials/header', {loggedin: loggedin}) %>
+
+<center>
+  <form action="/register" method="post" encType="multipart/form-data">
+    <input type="text" name="firstName" placeholder="First Name" required>
+    <br />
+    <input type="text" name="lastName" placeholder="Last Name" required>
+    <br />
+    <input type="text" name="nickName" placeholder="Nick Name">
+    <br />
+    <input type="email" name="email" placeholder="Email" required>
+    <br />
+    <input type="password" name="password" placeholder="Password" required>
+    <br />
+    <label for="birthdate">Birth Date: </label>
+    <br />
+    <input type="date" name="birthdate" value="" required>
+    <br />
+    <input type="text" name="hometown" placeholder="Home Town">
+    <br />
+    <select name="marital">
+      <option disabled selected value> -- Marital Status -- </option>
+      <option value="single">Single</option>
+      <option value="married">Married</option>
+      <option value="engaged">Engaged</option>
+      <option value="divorced">Divorced</option>
+      <option value="complicated">It's complicated</option>
+    </select>
+    <br />
+    <select name="gender" required>
+      <option disabled selected value> -- Gender -- </option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <br />
+    <input type="tel" name="phones" placeholder="Phone number(s), seperated by spaces">
+    <br />
+    <textarea name="aboutme" rows="8" cols="31" maxlength="256" placeholder="About me"></textarea>
+    <br />
+    <label for="img">Profile Picture: </label>
+    <br />
+    <input type="file" name="img" accept="image/*">
+    <br /><br />
+    <button type="submit" name="submit">Register!</button>
+  </form>
+</center>
+<%- include('partials/footer') %>
