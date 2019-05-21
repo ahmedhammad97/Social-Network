@@ -47,6 +47,7 @@
       <div class="recItem">
         <span class="recImg"><img src=""/></span>
         <span class="recName"></span>
+        <br />
         <button name="button" >Add Friend</button>
       </div>
     </span>
@@ -54,6 +55,7 @@
       <div class="recItem">
         <span class="recImg"><img src=""/></span>
         <span class="recName"></span>
+        <br />
         <button name="button" >Add Friend</button>
       </div>
     </span>
@@ -61,6 +63,7 @@
       <div class="recItem">
         <span class="recImg"><img src=""/></span>
         <span class="recName"></span>
+        <br />
         <button name="button" >Add Friend</button>
       </div>
     </span>
@@ -79,7 +82,7 @@
     let container = document.querySelectorAll('.recItem')
     for (let i=0; i < Math.min(container.length, data.length); i++){
       let elem = container[i];
-      elem.children[2].setAttribute("recId", data[i].Id);
+      elem.children[3].setAttribute("recId", data[i].Id);
       elem.children[0].children[0].setAttribute("src", "/assets/images/" + data[i].Picture);
       elem.children[1].innerHTML = data[i].NickName;
     }
