@@ -25,19 +25,25 @@
         alert("Something went wrong!");
       });
 
-    $(".recName button").click(() => {
-      $.ajax({
-        method: "POST",
-        url: "/addfriend",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({"friendId" : $(this).recId})
-      }).done(function(data) {
-        $(this).disabled = true;
-        alert("Request sent successfully")
-      }).fail(function(err) {
-        alert("Something went wrong!");
-      });
-    })
+      function sendRequest(event){
+        $.ajax({
+          method: "POST",
+          url: "/addfriend",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({"friendId" : event.getAttribute('recId')})
+        }).done(function(data) {
+          if (data){
+            event.disabled = true;
+            alert("Request sent successfully")
+          }
+          else{
+            alert("Something went wrong!");
+          }
+        }).fail(function(err) {
+          alert("Something went wrong!");
+        });
+      }
+
   </script>
 
   <div id="recommends">
@@ -48,7 +54,7 @@
         <span class="recImg"><img src=""/></span>
         <span class="recName"></span>
         <br />
-        <button name="button" >Add Friend</button>
+        <button name="button" onclick="sendRequest(this)">Add Friend</button>
       </div>
     </span>
     <span class="recCont">
@@ -56,7 +62,7 @@
         <span class="recImg"><img src=""/></span>
         <span class="recName"></span>
         <br />
-        <button name="button" >Add Friend</button>
+        <button name="button" onclick="sendRequest(this)">Add Friend</button>
       </div>
     </span>
     <span class="recCont">
@@ -64,7 +70,7 @@
         <span class="recImg"><img src=""/></span>
         <span class="recName"></span>
         <br />
-        <button name="button" >Add Friend</button>
+        <button name="button" onclick="sendRequest(this)">Add Friend</button>
       </div>
     </span>
   </div>
@@ -79,6 +85,9 @@
 
 <script>
   function renderRecommentations(data){
+    data.sort(function() {
+      return .5 - Math.random();
+    });
     let container = document.querySelectorAll('.recItem')
     for (let i=0; i < Math.min(container.length, data.length); i++){
       let elem = container[i];
