@@ -1,48 +1,59 @@
 <%- include('partials/header', {loggedin: loggedin}) %>
-    <script>
-      function acceptRequest(event){
-        let userId = event.parentNode.getAttribute("userId");
-        $.ajax({
-          method: "POST",
-          url: "/acceptrequest",
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify({"id": userId})
-        }).done(function(data) {
-          if(data){
-            event.parentNode.remove();
-            alert("Accepted successfully");
-          }
-          else{
-            alert("Something went wrong");
-          }
-        }).fail(function(err) {
-          alert("Something went wrong!");
-        });
-      }
 
-      function declineRequest(event){
-        let userId = event.parentNode.getAttribute("userId");
-        $.ajax({
-          method: "POST",
-          url: "/declinerequest",
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify({"id": userId})
-        }).done(function(data) {
-          if(data){
-            event.parentNode.remove();
-            alert("Declined successfully");
-          }
-          else{
-            alert("Something went wrong");
-          }
-        }).fail(function(err) {
-          alert("Something went wrong!");
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <center>
+<% if(data.length === 0) { %>
+  <script>
+    setTimeout(() => {
+      alert("No current requests")
+    }, 100);
+    setTimeout(() => {
+      window.location.assign("/");
+    }, 200);
+  </script>
+<% } else { %>
+  <script>
+    function acceptRequest(event){
+      let userId = event.parentNode.getAttribute("userId");
+      $.ajax({
+        method: "POST",
+        url: "/acceptrequest",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({"id": userId})
+      }).done(function(data) {
+        if(data){
+          event.parentNode.remove();
+          alert("Accepted successfully");
+        }
+        else{
+          alert("Something went wrong");
+        }
+      }).fail(function(err) {
+        alert("Something went wrong!");
+      });
+    }
+
+    function declineRequest(event){
+      let userId = event.parentNode.getAttribute("userId");
+      $.ajax({
+        method: "POST",
+        url: "/declinerequest",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({"id": userId})
+      }).done(function(data) {
+        if(data){
+          event.parentNode.remove();
+          alert("Declined successfully");
+        }
+        else{
+          alert("Something went wrong");
+        }
+      }).fail(function(err) {
+        alert("Something went wrong!");
+      });
+    }
+  </script>
+
+
+  <center>
     <ul>
       <% for(let i = 0; i< data.length; i++){ %>
         <li userId="<%= data[i].Id %>">
@@ -52,6 +63,7 @@
         </li>
       <% } %>
     </ul>
-    </center>
-  </body>
-</html>
+  </center>
+<% } %>
+
+<%- include('partials/footer') %>
