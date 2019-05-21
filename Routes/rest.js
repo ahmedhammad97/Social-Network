@@ -6,6 +6,9 @@ const registerUser = require(__dirname + '/../Services/registerUser')
 const loginUser = require(__dirname + '/../Services/loginUser')
 const recommender = require(__dirname + '/../Services/friendsRecommender')
 const addFriend = require(__dirname + '/../Services/addFriend')
+const fetchFriends = require(__dirname + '/../Services/fetchFriends')
+const fetchRequests = require(__dirname + '/../Services/fetchRequests')
+const fetchProfile = require(__dirname + '/../Services/fetchProfile')
 
 //BodyParser
 var jsonParser = bodyParser.json();
@@ -24,6 +27,12 @@ router.get('/login', (req, res) => {
   if (req.loggedin) res.redirect('/')
   else res.render('login', {loggedin : false})
 })
+
+router.get('/profile/:id', fetchProfile)
+
+router.get('/friendlist/:id', fetchFriends)
+
+router.get('/requestlist/:id', fetchRequests)
 
 router.post('/register', fileUpload(), urlencodedParser, registerUser)
 
