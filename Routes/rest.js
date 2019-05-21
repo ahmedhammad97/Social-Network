@@ -9,6 +9,8 @@ const addFriend = require(__dirname + '/../Services/addFriend')
 const fetchFriends = require(__dirname + '/../Services/fetchFriends')
 const fetchRequests = require(__dirname + '/../Services/fetchRequests')
 const fetchProfile = require(__dirname + '/../Services/fetchProfile')
+const acceptRequest = require(__dirname + '/../Services/acceptRequest')
+const declineRequest = require(__dirname + '/../Services/declineRequest')
 
 //BodyParser
 var jsonParser = bodyParser.json();
@@ -41,5 +43,9 @@ router.post('/login', urlencodedParser, loginUser)
 router.post('/friendsrecommendations', recommender)
 
 router.post('/addfriend', jsonParser, addFriend)
+
+router.post('/acceptrequest', jsonParser, acceptRequest, declineRequest)
+
+router.post('/declinerequest', jsonParser, declineRequest)
 
 module.exports = router;
