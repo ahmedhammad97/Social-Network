@@ -1,0 +1,57 @@
+<%- include('partials/header', {loggedin: loggedin}) %>
+    <script>
+      function acceptRequest(event){
+        let userId = event.parentNode.getAttribute("userId");
+        $.ajax({
+          method: "POST",
+          url: "/acceptrequest",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({"id": userId})
+        }).done(function(data) {
+          if(data){
+            event.parentNode.remove();
+            alert("Accepted successfully");
+          }
+          else{
+            alert("Something went wrong");
+          }
+        }).fail(function(err) {
+          alert("Something went wrong!");
+        });
+      }
+
+      function declineRequest(event){
+        let userId = event.parentNode.getAttribute("userId");
+        $.ajax({
+          method: "POST",
+          url: "/declinerequest",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({"id": userId})
+        }).done(function(data) {
+          if(data){
+            event.parentNode.remove();
+            alert("Declined successfully");
+          }
+          else{
+            alert("Something went wrong");
+          }
+        }).fail(function(err) {
+          alert("Something went wrong!");
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <center>
+    <ul>
+      <% for(let i = 0; i< data.length; i++){ %>
+        <li userId="<%= data[i].Id %>">
+          <a href="/profile/<%= data[i].Id %>"><%= data[i].NickName %></a>
+          <button onclick="acceptRequest(this)">Accept</button>
+          <button onclick="declineRequest(this)">Decline</button>
+        </li>
+      <% } %>
+    </ul>
+    </center>
+  </body>
+</html>

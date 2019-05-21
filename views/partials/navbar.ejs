@@ -4,8 +4,9 @@
   </span>
   <ul>
 <% if (loggedin) {%>
-  <li><a href="/friendlist">Friends</a></li>
-  <li><a href="/myprofile">Profile</a></li>
+  <li class="loggedinItems"><a>Requests</a></li>
+  <li class="loggedinItems"><a>Friends</a></li>
+  <li class="loggedinItems"><a>Profile</a></li>
   <li id="logout"><a>Logout</a></li>
 
   <script>
@@ -13,6 +14,12 @@
       document.cookie = `id=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
       window.location.assign("/");
     })
+
+    let tabs = document.querySelectorAll(".loggedinItems");
+    let userId = document.cookie.split(';')[0].slice(3);
+    tabs[0].firstChild.setAttribute("href", "/requestlist/" + userId)
+    tabs[1].firstChild.setAttribute("href", "/friendlist/" + userId)
+    tabs[2].firstChild.setAttribute("href", "/profile/" + userId)
   </script>
 <%} else {%>
   <li><a href="/register">Register</a></li>

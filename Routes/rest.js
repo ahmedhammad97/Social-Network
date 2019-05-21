@@ -6,6 +6,11 @@ const registerUser = require(__dirname + "/../Services/registerUser");
 const loginUser = require(__dirname + "/../Services/loginUser");
 const recommender = require(__dirname + "/../Services/friendsRecommender");
 const addFriend = require(__dirname + "/../Services/addFriend");
+const fetchFriends = require(__dirname + "/../Services/fetchFriends");
+const fetchRequests = require(__dirname + "/../Services/fetchRequests");
+const fetchProfile = require(__dirname + "/../Services/fetchProfile");
+const acceptRequest = require(__dirname + "/../Services/acceptRequest");
+const declineRequest = require(__dirname + "/../Services/declineRequest");
 const friendList = require(__dirname + "/../Services/friendList");
 //BodyParser
 var jsonParser = bodyParser.json();
@@ -39,10 +44,22 @@ router.post("/register", fileUpload(), urlencodedParser, registerUser);
 
 router.post("/login", urlencodedParser, loginUser);
 
+router.get("/profile/:id", fetchProfile);
+
+router.get("/friendlist/:id", fetchFriends);
+
+router.get("/requestlist/:id", fetchRequests);
+
+router.post("/register", fileUpload(), urlencodedParser, registerUser);
+
 router.post("/friendsrecommendations", recommender);
 
 router.post("/addfriend", jsonParser, addFriend);
 
 router.post("/friendList", friendList);
+
+router.post("/acceptrequest", jsonParser, acceptRequest, declineRequest);
+
+router.post("/declinerequest", jsonParser, declineRequest);
 
 module.exports = router;
