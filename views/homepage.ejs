@@ -15,15 +15,15 @@
   <center>
 <% if (loggedin) {%>
   <script>
-    // $.ajax({
-    //     method: "POST",
-    //     url: "/friendsrecommendations",
-    //     data: {}
-    //   }).done(function(data) {
-    //     renderRecommentations(data);
-    //   }).fail(function(err) {
-    //     alert("Something went wrong!");
-    //   });
+    $.ajax({
+        method: "POST",
+        url: "/friendsrecommendations",
+        data: {}
+      }).done(function(data) {
+        renderRecommentations(data);
+      }).fail(function(err) {
+        alert("Something went wrong!");
+      });
 
     $(".recName button").click(() => {
       $.ajax({
@@ -41,25 +41,28 @@
   </script>
 
   <div id="recommends">
-    <span class="recItem">
-      <span class="recImg"><img src=""/></span>
-      <br />
-      <span class="recName"></span>
-      <button name="button" >Add Friend</button>
+    <h2>People you may know</h2>
+    <br />
+    <span class="recCont">
+      <div class="recItem">
+        <span class="recImg"><img src=""/></span>
+        <span class="recName"></span>
+        <button name="button" >Add Friend</button>
+      </div>
     </span>
-
-    <span class="recItem">
-      <span class="recImg"><img src=""/></span>
-      <br />
-      <span class="recName"></span>
-      <button name="button" >Add Friend</button>
+    <span class="recCont">
+      <div class="recItem">
+        <span class="recImg"><img src=""/></span>
+        <span class="recName"></span>
+        <button name="button" >Add Friend</button>
+      </div>
     </span>
-
-    <span class="recItem">
-      <span class="recImg"><img src=""/></span>
-      <br />
-      <span class="recName"></span>
-      <button name="button" >Add Friend</button>
+    <span class="recCont">
+      <div class="recItem">
+        <span class="recImg"><img src=""/></span>
+        <span class="recName"></span>
+        <button name="button" >Add Friend</button>
+      </div>
     </span>
   </div>
 <%} else {%>
@@ -73,12 +76,12 @@
 
 <script>
   function renderRecommentations(data){
-    let container = document.querySelectorAll('#recommends')
+    let container = document.querySelectorAll('.recItem')
     for (let i=0; i < Math.min(container.length, data.length); i++){
       let elem = container[i];
-      elem.children[3].setAttribute("recId", data[i].id);
-      elem.children[0].children[0].setAttribute("src", data[i].imgSrc);
-      elem.children[2].text = data[i].name;
+      elem.children[2].setAttribute("recId", data[i].Id);
+      elem.children[0].children[0].setAttribute("src", "/assets/images/" + data[i].Picture);
+      elem.children[1].innerHTML = data[i].NickName;
     }
   }
 </script>
