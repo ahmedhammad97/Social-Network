@@ -110,6 +110,13 @@ form input,select,textarea,button{
   margin: 0;
 }
 
+#reqList li{
+  list-style-type: none;
+  font-size: 20px;
+  padding: 10px;
+  margin: 10px;
+}
+
 
 footer{
   width: 100%;

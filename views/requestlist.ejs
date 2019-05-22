@@ -54,7 +54,7 @@
 
 
   <center>
-    <ul>
+    <ul id="reqList">
       <% for(let i = 0; i< data.length; i++){ %>
         <li userId="<%= data[i].Id %>">
           <a href="/profile/<%= data[i].Id %>"><%= data[i].NickName %></a>
