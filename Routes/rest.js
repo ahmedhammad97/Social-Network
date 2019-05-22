@@ -32,9 +32,16 @@ router.get("/login", (req, res) => {
 
 router.get("/profile/:id", fetchProfile);
 
-router.get("/friendlist", fetchFriends);
+router.get("/friendlist", (req, res, next) => {
+  if (!req.loggedin) res.redirect("/");
+  else return next()
+}, fetchFriends);
 
-router.get("/requestlist", fetchRequests)
+router.get("/requestlist", (req, res, next) => {
+  if (!req.loggedin) res.redirect("/");
+  else return next()
+}, fetchRequests);
+
 
 router.post("/register", fileUpload(), urlencodedParser, registerUser);
 
