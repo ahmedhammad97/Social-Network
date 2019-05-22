@@ -30,7 +30,7 @@ router.get("/login", (req, res) => {
   else res.render("login", { loggedin: false });
 });
 
-router.get("/profile/:id", fetchProfile);
+router.get("/profile", fetchProfile);
 
 router.get("/friendlist", (req, res, next) => {
   if (!req.loggedin) res.redirect("/");

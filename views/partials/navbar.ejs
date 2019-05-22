@@ -19,7 +19,7 @@
     let userId = document.cookie.split(';')[0].slice(3);
     tabs[0].firstChild.setAttribute("href", "/requestlist")
     tabs[1].firstChild.setAttribute("href", "/friendlist")
-    tabs[2].firstChild.setAttribute("href", "/profile/" + userId)
+    tabs[2].firstChild.setAttribute("href", "/profile?id=" + userId)
   </script>
 <%} else {%>
   <li><a href="/register">Register</a></li>

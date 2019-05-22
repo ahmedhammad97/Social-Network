@@ -4,7 +4,7 @@
     <ul class="displayList">
       <% data.forEach(friend => { %>
         <li>
-          <a href="/profile/<%= friend.id %>"><%= friend.NickName %></a>
+          <a href="/profile?id=<%= friend.Id %>"><%= friend.NickName %></a>
         </li>
       <% }) %>
     </ul>

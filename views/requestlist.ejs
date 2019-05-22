@@ -57,7 +57,7 @@
     <ul class="displayList">
       <% for(let i = 0; i< data.length; i++){ %>
         <li userId="<%= data[i].Id %>">
-          <a href="/profile/<%= data[i].Id %>"><%= data[i].NickName %></a>
+          <a href="/profile?id=<%= data[i].Id %>"><%= data[i].NickName %></a>
           <button onclick="acceptRequest(this)">Accept</button>
           <button onclick="declineRequest(this)">Decline</button>
         </li>
