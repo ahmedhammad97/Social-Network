@@ -1,7 +1,31 @@
-<center>
-  <div class="profile">
-    <%= userType %>
-    <%= loggedin %>
-    <%= data %>
-  </div>
-</center>
+<%- include('partials/header', {loggedin: loggedin}) %>
+
+<div class="profile">
+  <center>
+  <span class="profileImg"><img src="/assets/images/<%= data.Picture %> "/></span>
+  <br />
+  <span><%= data.NickName %></span>
+  <br />
+  <span><%= data.Email %></span>
+  <br />
+  <span><%= data.Gender %></span>
+  <br />
+  <span>
+    <%= data.Birthday.getDate() %> /
+    <%= data.Birthday.getMonth() %> /
+    <%= data.Birthday.getFullYear() %>
+  </span>
+  <br />
+  <span><%= data.HomeTown %></span>
+  <br />
+  <% if (userType != "Stranger") { %>
+    <span>Private data :</span>
+    <br />
+    <span><%= data.AboutMe %></span>
+    <br />
+    <span><%= data.MaritalStatus %></span>
+  <% } %>
+  </center>
+</div>
+
+<%- include('partials/footer') %>
