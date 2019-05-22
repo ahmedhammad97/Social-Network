@@ -91,7 +91,7 @@
     let container = document.querySelectorAll('.recItem')
     for (let i=0; i < container.length; i++){
       let elem = container[i];
-      if(data[i] === undefined){elem.remove()}
+      if(data[i] === undefined){elem.remove(); break;}
       elem.children[3].setAttribute("recId", data[i].Id);
       elem.children[0].children[0].setAttribute("src", "/assets/images/" + data[i].Picture);
       elem.children[1].innerHTML = data[i].NickName;
